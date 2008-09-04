@@ -1,0 +1,9 @@
+%html
+  %head
+    %title SEO Analyzer
+  %body
+    %form{:method => :get, :action => '/report'}
+      %fieldset
+        %legend Page to analyze
+        %input{:type => :text, :name => 'url'}
+        %input{:type => :submit}

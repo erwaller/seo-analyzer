@@ -1,0 +1,23 @@
+<html>
+	<head>
+		<title>SEO Analyzer Report</title>
+		<link type="text/css" href="/the.css" rel="stylesheet" media="screen"></style>
+	</head>
+	<body>
+		<h1>Results for <%= params[:url] %></h1>
+		<ul>
+		<% @report.groups.each do |group| %>
+			<li class="group">
+				<h2><%= group.title %></h2>
+				<ul>
+				<% group.rules.each do |rule| %>
+					<li class="rule <%= rule.result.to_s %>">
+						<span class="title"><%= rule.title %></span>
+					</li>
+				<% end %>					
+				</ul>
+			</li>
+		<% end %>
+		</ul>
+	</body>
+</html>

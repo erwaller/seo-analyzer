@@ -1,0 +1,14 @@
+<html>
+	<head>
+		<title>SEO Analyzer</title>
+	</head>
+	<body>
+		<h1>Results for <%= params[:url] %></h1>
+		<dl>
+			<dt>Content to Markup Ratio</dt>
+			<dd><%= @content_ratio %></dd>
+			<dt>Top 15 Keywords</dt>
+			<dd><%= @top_keywords %></dd>
+		</dl>
+	</body>
+</html>

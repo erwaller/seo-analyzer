@@ -1,0 +1,55 @@
+ruleset "Page Statistics" do
+	rule "Page weight should be no more than 150kb" do
+	end
+	
+	info "Markup to Content Ratio" do
+	end
+end
+
+ruleset "Headers/Title" do
+	rule "No more than 70 characters in page title" do
+	end
+	
+	rule "Exactly one h1" do
+	end
+	
+	#H1 similiar to title
+	
+	recommend "At least one H2" do
+	end
+end
+
+ruleset "Hyperlinks" do
+	rule "No more than 100 unique links per page" do
+	end
+	
+	rule "All hyperlinks should have title tag" do
+	end
+end
+
+ruleset "Keywords" do
+	info "Top 15 keywords" do
+	end
+end
+
+ruleset "URL" do
+	rule "Pathname depth no greater than 4" do
+	end
+	
+	rule "No more than 2 query params" do
+	end
+	
+	recommend "Use hyphens in url to seperate words (not underscores)" do
+	end
+end
+
+ruleset "Meta tags" do
+	rule "No more than 250 characters in the meta description" do
+	end
+	
+	# ~150 chars will appear in search result
+end
+
+# ruleset "Frames"
+# 	don't use them
+# end
