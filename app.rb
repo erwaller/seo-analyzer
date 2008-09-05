@@ -6,7 +6,7 @@ require 'open-uri'
 require 'sinatra'
 
 get '/' do
-	erb :index
+  erb :index
 end
 
 get '/report' do
