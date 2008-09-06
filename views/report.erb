@@ -1,23 +1,29 @@
 <html>
 	<head>
-		<title>SEO Analyzer Report</title>
+		<title>SEO Analyzer Results</title>
 		<link type="text/css" href="/the.css" rel="stylesheet" media="screen"></style>
 	</head>
 	<body>
-		<h1>Results for <%= params[:url] %></h1>
-		<ul>
-		<% @report.groups.each do |group| %>
-			<li class="group">
-				<h2><%= group.title %></h2>
-				<ul>
-				<% group.rules.each do |rule| %>
-					<li class="rule <%= rule.result.to_s %>">
-						<span class="title"><%= rule.title %></span>
-					</li>
-				<% end %>					
-				</ul>
-			</li>
-		<% end %>
-		</ul>
+	  <div class="container">
+	    <h2 class="logo">SEO Analyzer</h2>
+		  <div class="title-wrap">
+		    <h1>Results for <span class="url"><%= params[:url] %></span></h1>
+		    <div class="clear"></div>
+		  </div>
+  		<ul>
+  		<% @report.groups.each do |group| %>
+  			<li class="group">
+  				<h2><span><%= group.title %></span></h2>
+  				<ul>
+  				<% group.rules.each do |rule| %>
+  					<li class="rule <%= rule.result.to_s %>">
+  						<span class="title"><%= rule.title %></span>
+  					</li>
+  				<% end %>					
+  				</ul>
+  			</li>
+  		<% end %>
+  		</ul>
+		<div>
 	</body>
 </html>
