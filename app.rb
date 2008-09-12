@@ -160,6 +160,14 @@ class DSL
 		@report.current_group.add_rule(title)
 		yield
 	end
+	
+	def recommend(text)
+	  @report.current_group.add_recommendation(text)
+	end
+	
+	def explain(text)
+	  @report.current_rule.add_explanation(text)
+	end
 
 	def pass
 		@report.current_rule.result = :pass
@@ -201,30 +209,59 @@ end
 
 class Group
 
-	attr_reader :rules, :title
+	attr_reader :rules, :title, :recommendations
 	
 	def initialize (title)
 		@title = title
 		@rules = []
+		@recommendations = []
 	end
 	
 	def add_rule (title)
 		@rules << Rule.new(title)
 	end
+	
+	def add_recommendation (text)
+	  @recommendations << Recommendation.new(text)
+	end
 end
 
 class Rule
 	
-	attr_reader :title
+	attr_reader :title, :explanations
 	attr_accessor :result
 	
 	# Result is one of :pass, :warn, :fail
 	def initialize (title)
 		@title = title
 		@result = :fail	# assume the rule fails until we hear otherwise
+		@explanations = []
 	end
 	
 	def result= (result)
 		@result = [:pass, :warn, :fail].include?(result) ? result : :fail
 	end
+	
+	def add_explanation (text)
+	  @explanations << Explanation.new(text)
+	end
+end
+
+# TODO: Use inheritance to simplify rules/recommendations
+class Recommendation
+  
+  attr_reader :text
+  
+  def initialize (text)
+    @text = text
+  end
+end
+
+class Explanation
+  
+  attr_reader :text
+  
+  def initialize (text)
+    @text = text
+  end
 end

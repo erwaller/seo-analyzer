@@ -1,6 +1,7 @@
 group "Page Statistics" do
 	rule "Page weight should be no more than 150kb" do
-		
+		explain "Google doesn't like really heavy pages.. I guess"
+		explain "What would another paragraph look like"
 		pass if src.size <= 150000
 	end
 	
@@ -15,6 +16,7 @@ group "Headers/Title" do
 	end
 	
 	rule "Exactly one h1" do
+	  explain "The <code>h1</code> tag is the most semantically important heading element."
 		h1s = page.search('h1')
 		pass if h1s.length == 1
 	end
