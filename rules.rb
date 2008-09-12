@@ -11,6 +11,7 @@ end
 
 group "Headers/Title" do
 	rule "No more than 70 characters in page title" do
+	  explain "Titles shouldn't be that long ... duhh"
 		title = page.search('head title').text
 		pass if title.length <= 70
 	end

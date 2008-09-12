@@ -19,7 +19,9 @@
   					<li class="rule <%= rule.result.to_s %>">
   						<span class="title"><%= rule.title %></span>
   						<% rule.explanations.each do |explanation| %>
-  						  <p><%= explanation.text %></p>
+  						  <p class="<% if explanation == rule.explanations.last %>last<% end %>">
+  						    <%= explanation.text %>
+  						  </p>
   						<% end %>
   					</li>
   				<% end %>					
