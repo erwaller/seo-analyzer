@@ -6,25 +6,29 @@ group "Headers/Title" do
 	end
 	
 	rule "No more than 70 characters in page title" do
-	  explain "Titles shouldn't be that long ... duhh"
 		title = page.search('head title').text
+		explain "Yours is #{title.length} characters long"
 		pass if title.length <= 70
 	end
 	
 	rule "h1 similiar to title" do
 	  jaccard_coef = my_jaccard(page.at('h1').inner_text, page.at('title').inner_text)
-	  explain "You'll be happy to know that the jaccard coefficient (well sort of) for you title and h1 is #{jaccard_coef}"
+	  explain "You'll be happy to know that the jaccard coefficient (well sort of) for your title and h1 is #{jaccard_coef}"
 	  pass if jaccard_coef > 0.5
 	end
 	
 	recommend "At least one H2" do
-	  pass if page.search('h2').length > 0
+	  h2s = page.search('h2')
+	  explain "You've got #{h2s.length}"
+	  pass if h2s.length > 0
 	end
 end
 
 group "Hyperlinks" do
 	rule "No more than 100 unique links per page" do
-		pass if page.search('a').uniq_elements.length <= 100
+	  unique_link_count = page.search('a').uniq_elements.length
+	  explain "You've got #{unique_link_count}"
+		pass if unique_link_count <= 100
 	end
 	
 	# rule "All hyperlinks should have title tag" do
@@ -64,8 +68,7 @@ end
 
 group "Page Statistics" do
 	rule "Page weight should be no more than 150kb" do
-		explain "Google doesn't like really heavy pages.. I guess"
-		explain "What would another paragraph look like"
+		explain "Your page weight is #{src.size/1000}kb"
 		pass if src.size <= 150000
 	end
 	

@@ -19,7 +19,7 @@
   					<li class="guideline rule <%= rule.result.to_s %>">
   						<span class="title"><%= rule.title %></span>
   						<% rule.explanations.each do |explanation| %>
-  						  <p class="<% if explanation == rule.explanations.last %>last<% end %>">
+  						  <p>
   						    <%= explanation.text %>
   						  </p>
   						<% end %>
@@ -29,7 +29,7 @@
   					<li class="guideline recommendation <%= recommendation.result.to_s %>">
   						<span class="title"><%= recommendation.title %></span>
   						<% recommendation.explanations.each do |explanation| %>
-  						  <p class="<% if explanation == recommendation.explanations.last %>last<% end %>">
+  						  <p>
   						    <%= explanation.text %>
   						  </p>
   						<% end %>
