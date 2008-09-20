@@ -163,22 +163,23 @@ class DSL
 	
 	def recommend(text)
 	  @report.current_group.add_recommendation(text)
+	  yield
 	end
 	
 	def explain(text)
-	  @report.current_rule.add_explanation(text)
+	  @report.current_guideline.add_explanation(text)
 	end
 
 	def pass
-		@report.current_rule.result = :pass
+		@report.current_guideline.result = :pass
 	end
 
 	def warn
-		@report.current_rule.result = :warn
+		@report.current_guideline.result = :warn
 	end
 
 	def fail
-		@report.current_rule.result = :fail
+		@report.current_guideline.result = :fail
 	end
 end
 
@@ -202,33 +203,36 @@ class Report
 		@groups.last
 	end
 	
-	def current_rule
-		current_group.rules.last
+	def current_guideline
+	  current_group.current_guideline
 	end
 end
 
 class Group
 
-	attr_reader :rules, :title, :recommendations
+	attr_reader :rules, :title, :recommendations, :current_guideline
 	
 	def initialize (title)
 		@title = title
 		@rules = []
 		@recommendations = []
+		@current_guideline
 	end
 	
 	def add_rule (title)
 		@rules << Rule.new(title)
+		@current_guideline = @rules.last
 	end
 	
 	def add_recommendation (text)
 	  @recommendations << Recommendation.new(text)
+		@current_guideline = @recommendations.last
 	end
 end
 
-class Rule
-	
-	attr_reader :title, :explanations
+class Guideline
+  
+  attr_reader :title, :explanations
 	attr_accessor :result
 	
 	# Result is one of :pass, :warn, :fail
@@ -247,14 +251,12 @@ class Rule
 	end
 end
 
-# TODO: Use inheritance to simplify rules/recommendations
-class Recommendation
+class Rule < Guideline
+	
+end
+
+class Recommendation < Guideline
   
-  attr_reader :text
-  
-  def initialize (text)
-    @text = text
-  end
 end
 
 class Explanation
@@ -264,4 +266,13 @@ class Explanation
   def initialize (text)
     @text = text
   end
+end
+
+def my_jaccard (x,y)
+  parse_words = lambda {|str| str.downcase.gsub(/[^a-z_+\s]/, '').gsub(/\s+/,' ').split(/[^a-zA-Z_]/)}
+  xws = parse_words.call(x)
+  yws = parse_words.call(y)
+  intersection = xws & yws
+  union = xws | yws
+  intersection.length.to_f / union.length
 end

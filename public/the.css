@@ -59,7 +59,6 @@ h2 {
 }
 h2.logo {
 	font-size:18px;
-	margin-top:45px;
 	padding:6px 0;
 	text-align:center;
 	border-bottom:1px solid #aaa;
@@ -77,11 +76,14 @@ ul {
 
 body {
 	text-align:center;
+	background:#ebeff2;
 }
 .container {
 	width:600px;
-	margin:10px auto;
+	margin:0 auto;
 	text-align:left;
+	padding:30px 20px 20px;
+	background:#fff;
 }
 
 h2 span {
@@ -98,7 +100,7 @@ h2 span {
 	border:1px dotted #ccc;
 	padding:15px;
 }
-.rule p {
+.guideline p {
 	font-family:helvetica, arial, sans-serif;
 	font-size:0.8125em;
 	margin:0.5em 0;
